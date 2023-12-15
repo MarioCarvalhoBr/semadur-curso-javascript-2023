@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html  lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            table, th, td {
+            border:1px solid black;
+            }
+            ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+              background-color: #333;
+            }
+            
+            li {
+              float: left;
+              border-right:1px solid #bbb;
+            }
+            
+            li:last-child {
+              border-right: none;
+            }
+            
+            li a {
+              display: block;
+              color: white;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+            }
+            
+            li a:hover:not(.active) {
+              background-color: #111;
+            }
+            
+            .active {
+              background-color: #04AA6D;
+            }
+            </style>
+    </head>
+    <body>
+
+        <ul>
+            <li><a class="active" href="index.html">PRODUTOS</a></li>
+            <li><a href="contato.html">CONTATO</a></li>
+            <li><a href="sobre.html">SOBRE</a></li>
+        </ul>
+        <br>
+        <br>
+        <h1>Detalhes do Produto</h1>
+        <!--
+        "id": 2,
+        "title": "iPhone X",
+        "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+        "price": 899,
+        "discountPercentage": 17.94,
+        "rating": 4.44,
+        "stock": 34,
+        "brand": "Apple",
+        "category": "smartphones",
+        "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+        "images": [
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+        ]
+        }
+        -->
+        <h3 id="id">ID: </h3>
+        <h3 id="title">Título: </h3>
+        <h3 id="description">Descrição: </h3>
+        <h3 id="price">Preço: </h3>
+        <h3 id="discountPercentage">Desconto: </h3>
+        <h3 id="rating">Avaliação: </h3>
+        <h3 id="stock">Estoque: </h3>
+        <h3 id="brand">Marca: </h3>
+        <h3 id="category">Categoria: </h3>
+        <img id="thumbnail" src="" alt="Imagem do Produto">
+        <br>
+        <br>
+        <h3>Imagens do Produto</h3>
+
+    <script src="scripts/main.js"></script>
+    <script>
+        carregar_detalhes();
+    </script>
+    </body>
+</html>

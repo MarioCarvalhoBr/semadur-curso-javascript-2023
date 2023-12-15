@@ -1,0 +1,23 @@
+[
+    {
+        "codigo": 1,
+        "nome": "Maria",
+        "sobrenome": "Souza",
+        "email": "maria@email.com",
+        "telefone": "(00) 0000-0000"
+    },
+    {
+        "codigo": 2,
+        "nome": "João",
+        "sobrenome": "Silva",
+        "email": "joao@email.com",
+        "telefone": "(11) 1111-0000"
+    },
+    {
+        "codigo": 3,
+        "nome": "José",
+        "sobrenome": "Santos",
+        "email": "jose@email.com",
+        "telefone": "(22) 2222-0000"
+    }
+]

@@ -1,0 +1,19 @@
+{
+  "name": "projeto_1_teste",
+  "version": "1.0.0",
+  "description": "Esse projeto é teste do NPM",
+  "main": "servidor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "Mário Carvalho",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5"
+  }
+}

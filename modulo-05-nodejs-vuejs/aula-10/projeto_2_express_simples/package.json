@@ -1,0 +1,14 @@
+{
+  "name": "projeto_2_express_simples",
+  "version": "1.0.0",
+  "description": "<h1> Projeto Express Simples </h1>",
+  "main": "servidor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

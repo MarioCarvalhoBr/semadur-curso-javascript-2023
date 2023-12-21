@@ -6,7 +6,7 @@ E-mail: mario.carvalho@ufms.br
 */
 // Bibliotecas
 const express = require('express');
-const mysql = require('mysql');
+const conexao = require('./banco');
 const cors = require('cors');
 
 // Instanciando o express
@@ -19,20 +19,8 @@ app.use(cors());
 app.use(express.json());
 
 // CONFIGURAÇÕES
-const PORTA = 3000;
+const PORTA = 3001;
 const IP = 'localhost';
-
-const conexao = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'admin123',
-    database: 'minha_loja'
-});
-
-conexao.connect(err => {
-    if (err) throw err;
-    console.log('Conectado ao MySQL!');
-});
 
 // Rota padrão /
 app.get('/', (req, res) => {

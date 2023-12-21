@@ -6,14 +6,14 @@ E-mail: mario.carvalho@ufms.br
 */
 // Bibliotecas
 const express = require('express');
-const { listar, inserir, buscarPorId, atualizar, excluir } = require('./banco');
-const cors = require('cors');
+const {getLivros,
+    getAutores,
+    inserirLivro,
+    deletarLivro,
+    atualizarLivro,
+    buscarPorCodigo } = require('./banco_client');
 
-listar().then(usuarios => console.log(usuarios));
-inserir({ nome: 'Mário', email: 'mario', idade: 30, endereco: 'Rua 1', profissao: 'Professor' }).then(usuario => console.log(usuario));
-buscarPorId(1).then(usuario => console.log(usuario));
-atualizar(1, { nome: 'Mário de Araújo Carvalho', email: 'mario', idade: 30, endereco: 'Rua 1', profissao: 'Professor' }).then(usuario => console.log(usuario));
-excluir(1).then(usuario => console.log(usuario));
+const cors = require('cors');
 
 // Instanciando o express
 const app = express();
@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 // CONFIGURAÇÕES
-const PORTA = 3000;
+const PORTA = 3001;
 const IP = 'localhost';
 
 // Rota padrão /
@@ -33,33 +33,64 @@ app.get('/', (req, res) => {
     res.send('Olá mundo!');
 });
 
-app.get('/usuarios', (req, res) => {
-    listar().then(usuarios => res.json(usuarios));
+// Rota para listar livros
+app.get('/livros', (req, res) => {
+    getLivros((err, livros) => {
+        if (err) {
+            res.status(400).json({ erro: err.message });
+        } else {
+            res.json(livros.rows);
+        }
+    });
 });
 
-app.get('/usuarios/:id', (req, res) => {
-    buscarPorId(req.params.id).then(usuario => res.json(usuario));
+app.get('/livros/:id', (req, res) => {
+    buscarPorCodigo(req.params.id, (err, livro) => {
+        if (err) {
+            res.status(400).json({ erro: err.message });
+        } else {
+            res.json(livro.rows[0]);
+        }
+    });
 });
 
 
-app.post('/usuarios', (req, res) => {
+app.post('/livros', (req, res) => {
     // const { nome, email, idade, endereco, profissao } = req.body; // Exe: { nome: 'Mário', email: 'mario', idade: 30, endereco: 'Rua 1', profissao: 'Professor'}
-    const nome = req.body.nome;
-    const email = req.body.email;
-    const idade = req.body.idade;
-    const endereco = req.body.endereco;
-    const profissao = req.body.profissao;
+    const codigo = req.body.codigo;
+    const titulo = req.body.titulo;
+    inserirLivro(codigo, titulo, (err, livro) => {
+        if (err) {
+            res.status(400).json({ erro: err.message });
+        } else {
+            res.json({dado: livro.rows[0], mensagem: 'Livro inserido com sucesso!'});
+        }
+    });
    
-    inserir({ nome, email, idade, endereco, profissao }).then(usuario => res.json(usuario));
+    // inserir({ nome, email, idade, endereco, profissao }).then(usuario => res.json(usuario));
 });
 
-app.put('/usuarios/:id', (req, res) => {
-    const { nome, email, idade, endereco, profissao } = req.body;
-    atualizar(req.params.id, { nome, email, idade, endereco, profissao }).then(usuario => res.json(usuario));
+app.put('/livros/:id', (req, res) => {
+    const { codigo, titulo } = req.body;
+    atualizarLivro(codigo, titulo, (err, livro) => {
+        if (err) {
+            res.status(400).json({ erro: err.message });
+        } else {
+            res.json({dado: livro.rows[0], mensagem: 'Livro atualizado com sucesso!'});
+        }
+    });
+    // atualizar(req.params.id, { nome, email, idade, endereco, profissao }).then(usuario => res.json(usuario));
 });
 
-app.delete('/usuarios/:id', (req, res) => {
-    excluir(req.params.id).then(usuario => res.json(usuario));
+app.delete('/livros/:id', (req, res) => {
+    deletarLivro(req.params.id, (err, livro) => {
+        if (err) {
+            res.status(400).json({ erro: err.message });
+        } else {
+            res.json({dado: livro.rows[0], mensagem: 'Livro excluído com sucesso!'});
+        }
+    });
+    // excluir(req.params.id).then(usuario => res.json(usuario));
 });
 
 // Ouvidor
